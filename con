@@ -15,3 +15,6 @@ JOIN p.cometarioList cl
 WHERE m.nombre = '#Tecnologia'
 ORDER BY LENGTH(cl.comentario) desc
 
+SELECT r.activo, r.descripcion, r.idRol, r.nombre FROM Rol r WHERE r.activo = 'false' ORDER BY r.idRol ASC
+
+SELECT r.nombre FROM Rol r WHERE NOT EXISTS (SELECT rc.rol FROM RolCategoria rc WHERE rc.rol.idRol = r.idRol) ORDER BY r.nombre ASC
