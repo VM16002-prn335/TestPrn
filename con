@@ -18,3 +18,5 @@ ORDER BY LENGTH(cl.comentario) desc
 SELECT r.activo, r.descripcion, r.idRol, r.nombre FROM Rol r WHERE r.activo = 'false' ORDER BY r.idRol ASC
 
 SELECT r.nombre FROM Rol r WHERE NOT EXISTS (SELECT rc.rol FROM RolCategoria rc WHERE rc.rol.idRol = r.idRol) ORDER BY r.nombre ASC
+
+SELECT m.nombre ,COUNT(mp.idPost) veces FROM Meta m, m.postList mp, Post p WHERE p.idPost = mp.idPost AND mp.idPost = (SELECT p.idPost FROM Post p, p.postPasoList pl, pl.paso plp, plp.idTipoPaso plpi WHERE plpi.nombre = "SENSURADO") GROUP BY m.nombre, mp.idPost ORDER BY veces DESC
