@@ -1,0 +1,17 @@
+SELECT c FROM Categoria c WHERE c.idCategoria NOT IN 
+(SELECT DISTINCT ri.idCategoria FROM RolCategoria r, r.categoria ri) AND c.idCategoria NOT IN 
+(SELECT pi.idCategoria FROM Post p, p.idCategoria pi) ORDER BY c.idCategoria ASC
+
+SELECT DISTINCT c.comentario
+FROM Cometario c 
+WHERE c.fecha = CURRENT_DATE 
+AND c.aprobado = false AND 
+c.idPost.idPost IN (SELECT pp1.postPasoPK.idPost FROM PostPaso pp1 WHERE pp1.paso.nombre = 'Publicado')
+
+SELECT DISTINCT m.nombre,cl.comentario
+FROM Meta m
+JOIN m.postList p
+JOIN p.cometarioList cl
+WHERE m.nombre = '#Tecnologia'
+ORDER BY LENGTH(cl.comentario) desc
+
